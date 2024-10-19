@@ -6,22 +6,16 @@ class LinkedList {
   }
 }
 
-
-// Time -> O(n) | Space -> O(1) - where n is the number of nodes
+// Time -> O(n) | Space -> O(1) where n is the number of nodes
 function middleNode(linkedList) {
 
-  let cur = linkedList;
-  let result = linkedList;
-  let count = 0;
-  
-  while (cur !== null) {
-    cur = cur.next;
-    count++;
-  }
-  
-  for (let i = 0; i < Math.floor(count/2); i++) {
-    result = result.next;
-  }
-  return result;
-}
+  let slowNode = linkedList;
+  let fastNode = linkedList;
 
+  while (fastNode !== null && fastNode.next !== null) {
+    slowNode = slowNode.next;
+    fastNode = fastNode.next.next;
+  }
+  
+  return slowNode;
+}
